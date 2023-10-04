@@ -3,6 +3,9 @@ body {
     color: white;
     font-family: 'Dela Gothic One', cursive;
 }
+h2 {
+    margin: 0;
+}
 .wrapper {
     margin: 0 5% 0 25%;
 }
@@ -16,20 +19,22 @@ header {
     background-color: #723da4;
     border-radius: 10px;
     flex-direction: column;
-    margin: 0 2% 0 2%;
     padding: 10px;
-}
-.sidebarsizes {
     width: 20%;
+}
+.sidebarProducts:hover {
+    height: 50%;
+}
+.sidebarSizes {
     height: 100%;
 }
 .sidebarHeader {
     background-color: #c49ce0;
     border-radius: 10px;
-    text-align: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
     padding: 10px;
     height: 100%;
 }
@@ -40,8 +45,9 @@ header {
     height: 50px;
     width: 50px;
     cursor: pointer;
+    rotate: 90deg;
 }
-.sidebarIcon {
-    transition: 0.5s;
-    transform: rotate(180deg);
+.sidebarTerritory {
+    display: flex;
+    flex-direction: row;
 }
