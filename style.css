@@ -1,26 +1,47 @@
 body {
     background-color: #976ab2;
     color: white;
+    font-family: 'Dela Gothic One', cursive;
 }
 .wrapper {
-    margin: 0 5% 0 20%;
+    margin: 0 5% 0 25%;
 }
 header {
-    font-family: 'Dela Gothic One', cursive;
     font-size: 25px;
     height: 100%;
 }
 .sidebar {
+    position: sticky;
     display: flex;
     background-color: #723da4;
     border-radius: 10px;
-    display: flex;
     flex-direction: column;
-    width: 16%;
     margin: 0 2% 0 2%;
+    padding: 10px;
+}
+.sidebarsizes {
+    width: 20%;
+    height: 100%;
 }
 .sidebarHeader {
-    background-color: #d8a3fa;
+    background-color: #c49ce0;
     border-radius: 10px;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100%;
+}
+.sidebarProducts {
+    overflow-y: scroll;
+}
+.sidebarIcon {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+.sidebarIcon {
+    transition: 0.5s;
+    transform: rotate(180deg);
 }
