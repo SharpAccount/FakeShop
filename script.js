@@ -6,12 +6,12 @@ function startAnim() {
         const sideBarPosition = fullSidebar.getBoundingClientRect();
         if (sideBarPosition.left === pathToMove) {
             button.style.rotate = "90deg"
-            fullSidebar.style.left = "0" + "px";
+            fullSidebar.style.left = "0";
         } else if(sideBarPosition.left === 0) {
         const sidebarposition = fullSidebar.getBoundingClientRect();
         if (sidebarposition.left === pathToMove) {
             button.style.rotate = "90deg"
-            fullSidebar.style.left = "0" + "px";
+            fullSidebar.style.left = "0";
         } else if(sidebarposition.left === 0) {
             button.style.rotate = "270deg"
             fullSidebar.style.left = pathToMove + "px";
@@ -19,7 +19,6 @@ function startAnim() {
     }
 }
 
-let idCount = 0;
 async function getProducts() {
     return (await fetch('https://fakestoreapi.com/products')).json();
 }
@@ -32,11 +31,10 @@ getProducts().then(products => {
         const productBlockInfo = document.createElement('div');
         const productBlockTitle = document.createElement('div');
         const productTitle = document.createElement('h3');
-        const seperateLine = document.createElement('hr');
+        const separateLine = document.createElement('hr');
         const description = document.createElement('p');
         const productBlockPrice = document.createElement('div');
-        //const productPrice = document.createElement('p');
-        //const productPriceValue = document.createElement('p');
+        const productPriceValue = document.createElement('p');
         const productBlockRating = document.createElement('div');
         const productRating = document.createElement('p');
         const productRatingValue = document.createElement('p');
@@ -47,14 +45,15 @@ getProducts().then(products => {
         productImage.src = item['image'];
         productTitle.textContent = item['title'];
         description.textContent = item['description'];
-        //productPrice.textContent = 'Price: ';
-        //productPriceValue.textContent = '$' + item['price'];
         productRating.textContent = 'Rating: ';
         productRatingValue.textContent = item['rating']['rate'] + '/5';
         productCategory.textContent = item['category']
-        productAddToCartButton.textContent = 'Add to cart' + " for " + "$" + item['price'];
+        productAddToCartButton.textContent = 'Add to cart' + " for " + "$";
+        productPriceValue.textContent = item['price']
 
-        productAddToCartButton.setAttribute("data-number", idCount + "");
+        productAddToCartButton.setAttribute("data-number", item["id"]);
+        productPriceValue.setAttribute("data-number", "0" + item["id"]);
+
         productAddToCartButton.addEventListener("click", () => {
             addProductToSidebar(productAddToCartButton.getAttribute("data-number"), item['title'], item['price'])
         });
@@ -71,18 +70,16 @@ getProducts().then(products => {
         productCategory.className = 'productCategory';
         productAddToCartButton.className = 'productButton';
 
-
         productBlockRating.append(productRating);
         productBlockRating.append(productRatingValue);
 
-        //productBlockPrice.append(productPrice);
-        //productBlockPrice.append(productPriceValue);
+        productAddToCartButton.append(productPriceValue);
 
         productImageFrame.append(productImage);
         productBlockTitle.append(productTitle);
 
         productBlockInfo.append(productBlockTitle);
-        productBlockInfo.append(seperateLine);
+        productBlockInfo.append(separateLine);
         productBlockInfo.append(description);
         productBlockInfo.append(productBlockPrice);
         productBlockInfo.append(productBlockRating);
@@ -94,7 +91,6 @@ getProducts().then(products => {
 
         wrapper.append(productBlock);
 
-        idCount++;
     })
 })
 
@@ -102,7 +98,7 @@ let cart = {};
 let cartPrice = 0;
 function addProductToSidebar(id, title, price) {
     if (cart[id] > 0) {
-        increaseAmount(id);
+        increaseAmount(id, price);
         return;
     }
 
@@ -122,9 +118,11 @@ function addProductToSidebar(id, title, price) {
     const minusSign = document.createElement('div');
     const productsPriceBlock = document.createElement('div');
     const productsPrice = document.createElement('h3');
+    const productsPriceValueBlock = document.createElement('div');
     const productsPriceValue = document.createElement('p');
     const sideBar = document.getElementById('sidebarProducts');
     const totalPrice = document.getElementById('totalPrice');
+    const dollarSign = document.createElement('p');
 
     sideBarProduct.className = "sidebarElement";
     productNameBlock.className = "sidebarElementInfo";
@@ -136,19 +134,32 @@ function addProductToSidebar(id, title, price) {
     minusSign.classList.add("sign");
     minusSign.classList.add("minus");
     productsPriceBlock.className = "sidebarElementInfo";
+    productsPriceValueBlock.className = "productPositionPrice";
     productsPrice.className = "sidebarLastElement";
+    dollarSign.className = "productNums";
     productsPriceValue.className = "productNums";
     Element.className = "sidebarElement";
 
-    productAmountValue.setAttribute('data-number', id + "");
-    productsPriceValue.setAttribute('data-number', id + "");
+    dollarSign.textContent = "$";
+
+    productAmountValue.setAttribute('data-number', "" + id);
+    productsPriceValue.setAttribute('data-number', "P0" + id);
+    Element.setAttribute('data-number', "00" + id);
+
+    plusSign.addEventListener('click', () => {
+        increaseAmount(id, price);
+    })
+    minusSign.addEventListener('click', () => {
+        decreaseAmount(id, price);
+    })
+
 
     productName.textContent = "Name";
     productNameValue.textContent = title;
     productAmount.textContent = "Amount";
     productAmountValue.textContent = cart[id];
     productsPrice.textContent = "Price:";
-    productsPriceValue.textContent = "$" + price;
+    productsPriceValue.textContent = price;
     totalPrice.textContent = cartPrice;
 
     productAmountBlock.append(plusSign, productAmountValue, minusSign);
@@ -156,20 +167,46 @@ function addProductToSidebar(id, title, price) {
 
     productNameBlock.append(productName, productNameValue);
 
-    productsPriceBlock.append(productsPrice, productsPriceValue);
+    productsPriceValueBlock.append(dollarSign, productsPriceValue);
+
+    productsPriceBlock.append(productsPrice, productsPriceValueBlock);
 
     Element.append(productNameBlock, AmountBlock, productsPriceBlock);
     sideBar.append(Element);
 
 }
-function increaseAmount(_id) {
-    const amount = document.querySelector('[data-number=_id]');
-    const price = document.querySelector('[data-number=_id]');
-    console.log(_id);
-    console.log(amount);
-    console.log(price);
+function removeProductFromSidebar(id, price) {
 
-    amount.textContent = (parseInt(amount.textContent) + 1).toString();
-    price.textContent = ((parseInt(amount.textContent) / parseInt(amount.textContent)) + parseInt(amount.textContent)) + "";
+    cartPrice = (cartPrice - price);
 
+    returnAmountPriceTotal(3, id).textContent = (cartPrice).toFixed(2);
+
+    returnAmountPriceTotal(4, id).remove();
+}
+function increaseAmount(_id, _price) {
+
+    returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) + 1).toString();
+    returnAmountPriceTotal(2, _id).textContent = (parseFloat(returnAmountPriceTotal(2, _id).textContent) + _price).toFixed(2);
+    cartPrice = (cartPrice + _price);
+
+    returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
+}
+function decreaseAmount(_id, _price) {
+
+    if((parseInt(returnAmountPriceTotal(1, _id).textContent) - 1) === 0) {
+        removeProductFromSidebar(_id, _price);
+        return;
+    }
+
+    returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) - 1).toString();
+    returnAmountPriceTotal(2, _id).textContent = (parseFloat(returnAmountPriceTotal(2, _id).textContent) - _price).toFixed(2);
+    cartPrice = (cartPrice - _price);
+
+    returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
+}
+function returnAmountPriceTotal(elem, index) {
+    if (elem === 1) return document.querySelector('[data-number="'+ index +'"]');
+    if (elem === 2) return document.querySelector('[data-number="'+ "P0" + index +'"]');
+    if (elem === 4) return document.querySelector('[data-number="'+ "00" + index +'"]');
+    if (elem === 3) return document.getElementById('totalPrice');
 }

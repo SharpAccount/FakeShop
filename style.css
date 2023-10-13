@@ -97,6 +97,10 @@ header {
 .productNums {
     font-size: 23px;
 }
+.productPositionPrice {
+    display: flex;
+    flex-direction: row;
+}
 .sign {
     background-size: cover;
     width: 23px;
@@ -127,14 +131,23 @@ header {
     margin-top: 18px;
     top: 18px;
 }
+#buyButton {
+    background-color: white;
+    font-family: 'Dela Gothic One', cursive;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    margin: 18.7px 0;
+}
+#buyButton:hover {
+    background-color: #cbc7c7;
+}
 .product {
     margin: 15px 35px;
     height: 500px;
-<<<<<<< HEAD
     width: 477px;
-=======
-    width: 479px;
->>>>>>> dc3b8f474d0c7640197af0cefb379ff38c860930
     background-color: #723da4;
     border-radius: 10px;
 }
@@ -198,13 +211,16 @@ header {
     left: 17px;
 }
 .productButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     font-size: 25px;
     width: 100%;
     border-radius: 0 0 10px 10px;
     background-color: #c49ce0;
-    text-align: center;
     height: 71px;
     border: none;
 }
