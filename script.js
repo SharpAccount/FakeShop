@@ -1,15 +1,21 @@
 function startAnim() {
-    const fullSidebar = document.getElementById('sidebarTerritory');
-    const sidebar = document.getElementById('sidebar');
-    const button = document.getElementById('sidebarIcon');
-    const pathToMove = -1 * sidebar.clientWidth - 2;
-    const sideBarPosition = fullSidebar.getBoundingClientRect();
-    if (sideBarPosition.left === pathToMove) {
-        button.style.rotate = "90deg"
-        fullSidebar.style.left = "0" + "px";
-    } else if(sideBarPosition.left === 0) {
-        button.style.rotate = "270deg"
-        fullSidebar.style.left = pathToMove + "px";
+        const fullSidebar = document.getElementById('sidebarTerritory');
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('sidebarIcon');
+        const pathToMove = -1 * sidebar.clientWidth - 2;
+        const sideBarPosition = fullSidebar.getBoundingClientRect();
+        if (sideBarPosition.left === pathToMove) {
+            button.style.rotate = "90deg"
+            fullSidebar.style.left = "0" + "px";
+        } else if(sideBarPosition.left === 0) {
+        const sidebarposition = fullSidebar.getBoundingClientRect();
+        if (sidebarposition.left === pathToMove) {
+            button.style.rotate = "90deg"
+            fullSidebar.style.left = "0" + "px";
+        } else if(sidebarposition.left === 0) {
+            button.style.rotate = "270deg"
+            fullSidebar.style.left = pathToMove + "px";
+        }
     }
 }
 
@@ -91,6 +97,7 @@ getProducts().then(products => {
         idCount++;
     })
 })
+
 let cart = {};
 let cartPrice = 0;
 function addProductToSidebar(id, title, price) {

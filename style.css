@@ -130,7 +130,11 @@ header {
 .product {
     margin: 15px 35px;
     height: 500px;
+<<<<<<< HEAD
     width: 477px;
+=======
+    width: 479px;
+>>>>>>> dc3b8f474d0c7640197af0cefb379ff38c860930
     background-color: #723da4;
     border-radius: 10px;
 }
