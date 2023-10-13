@@ -4,19 +4,20 @@ function startAnim() {
         const button = document.getElementById('sidebarIcon');
         const pathToMove = -1 * sidebar.clientWidth - 2;
         const sideBarPosition = fullSidebar.getBoundingClientRect();
+        console.log(fullSidebar);
+    console.log(sidebar);
+    console.log(button);
+    console.log(pathToMove);
+    console.log(sideBarPosition);
         if (sideBarPosition.left === pathToMove) {
             button.style.rotate = "90deg"
             fullSidebar.style.left = "0";
+            console.log('did1');
         } else if(sideBarPosition.left === 0) {
-        const sidebarposition = fullSidebar.getBoundingClientRect();
-        if (sidebarposition.left === pathToMove) {
-            button.style.rotate = "90deg"
-            fullSidebar.style.left = "0";
-        } else if(sidebarposition.left === 0) {
             button.style.rotate = "270deg"
             fullSidebar.style.left = pathToMove + "px";
+            console.log('did2');
         }
-    }
 }
 
 async function getProducts() {
@@ -97,6 +98,7 @@ getProducts().then(products => {
 let cart = {};
 let cartPrice = 0;
 const buyButton = document.getElementById('buyButton');
+
 buyButton.addEventListener('click', ()=>{
     if(Object.keys(cart).length > 0) {
         for(let i = 0; i < Object.keys(cart).length; i+=0) {

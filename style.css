@@ -4,7 +4,6 @@ body {
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
 }
-
 h1 {
     margin: 0;
 }
@@ -14,7 +13,6 @@ h3 {
 hr {
     border-top: none;
     margin: 0;
-
 }
 p {
     margin: 10px 0;
@@ -34,14 +32,20 @@ p {
 header {
     font-size: 25px;
     height: 100%;
-    background-color: #723da4;
+    display: flex;
+    justify-content: center;
     text-align: center;
     width: 100%;
 }
+.prods {
+    width: fit-content;
+    background-color: #723da4;
+    color: #976ab2;
+}
 #sidebarTerritory {
     display: flex;
-    flex-direction: row;
     position: relative;
+    flex-direction: row;
     transition: left 0.8s ease-in-out;
     left: 0;
     width: 255px;
@@ -56,6 +60,7 @@ header {
     height: 100vh;
     position: sticky;
     top: 0;
+    border-radius: 10px;
 }
 .sidebarHeader {
     text-align: center;
