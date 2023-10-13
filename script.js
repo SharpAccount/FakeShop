@@ -96,7 +96,18 @@ getProducts().then(products => {
 
 let cart = {};
 let cartPrice = 0;
+const buyButton = document.getElementById('buyButton');
+buyButton.addEventListener('click', ()=>{
+    if(Object.keys(cart).length > 0) {
+        for(let i = 0; i < Object.keys(cart).length; i+=0) {
+            removeProductFromSidebar(Object.keys(cart)[i], returnAmountPriceTotal(2, Object.keys(cart)[i]).textContent);
+        }
+        alert("Thanks for purchase!");
+    }
+})
+
 function addProductToSidebar(id, title, price) {
+
     if (cart[id] > 0) {
         increaseAmount(id, price);
         return;
@@ -159,7 +170,7 @@ function addProductToSidebar(id, title, price) {
     productAmount.textContent = "Amount";
     productAmountValue.textContent = cart[id];
     productsPrice.textContent = "Price:";
-    productsPriceValue.textContent = price;
+    productsPriceValue.textContent = price.toFixed(2);
     totalPrice.textContent = cartPrice;
 
     productAmountBlock.append(plusSign, productAmountValue, minusSign);
@@ -178,6 +189,7 @@ function addProductToSidebar(id, title, price) {
 function removeProductFromSidebar(id, price) {
 
     cartPrice = (cartPrice - price);
+    delete cart[id];
 
     returnAmountPriceTotal(3, id).textContent = (cartPrice).toFixed(2);
 
@@ -199,7 +211,7 @@ function decreaseAmount(_id, _price) {
     }
 
     returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) - 1).toString();
-    returnAmountPriceTotal(2, _id).textContent = (parseFloat(returnAmountPriceTotal(2, _id).textContent) - _price).toFixed(2);
+    returnAmountPriceTotal(2, _id).textContent = (parseFloat(returnAmountPriceTotal(2, _id).textContent) - _price).toString();
     cartPrice = (cartPrice - _price);
 
     returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
