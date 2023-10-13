@@ -8,9 +8,13 @@ body {
 h1 {
     margin: 0;
 }
+h3 {
+    margin: 8px 0 10px 0;
+}
 hr {
-    border-top: #bdbbbb solid 2px;
+    border-top: none;
     margin: 0;
+
 }
 p {
     margin: 10px 0;
@@ -32,6 +36,7 @@ header {
     height: 100%;
     background-color: #723da4;
     text-align: center;
+    width: 100%;
 }
 #sidebarTerritory {
     display: flex;
@@ -63,11 +68,15 @@ header {
     align-items: center;
     padding: 15px 10px;
 }
-.sidebarProducts {
+.sepLine {
+    border-top: #bdbbbb solid 2px;
+    margin: 0;
+}
+#sidebarProducts {
     overflow-y: auto;
     overflow-x: hidden;
     flex-direction: column;
-    max-height: 30%;
+    max-height: 50%;
 }
 .sidebarElement {
     display: flex;
@@ -78,10 +87,32 @@ header {
     flex-direction: column;
     border-bottom: #bdbbbb solid 1px;
 }
-.sidebarLastElement {
+.amount {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
 }
+.productNums {
+    font-size: 23px;
+}
+.sign {
+    background-size: cover;
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+    background-position: center;
+}
+.plus {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAA/CAYAAABXXxDfAAABOklEQVRoge3b0W3CQBCE4VkqCB2RSqATm0pQKrHpIKkEdzB58N0DEhhL5G6d2/mekbw/GJBYDpC6SB5IDiRvnA0kj95zFUey43Od93zFkDwthGcH7zmLSLf3K0OteazWhQCAJFc8bDKzffFhsM14mFmVuXY1LrJVio9K8VEpPirFR6X4qBQfleKjUnxUio9K8dmDTcqfWjtUiWsnjzdDXN6ktKYD0k/XJE8ALu/dRP/OZ44fALS5JnpuzPGr348NmfIH3uQ6ho+PHP/tOoaPa44/u47h47IDADMbEesJOJvZ1902NH3lHdHmJ/8E4AdAn15srajDUnxUio9K8VEpPirFR6X4qBQfleKjUnxUiq9oU5uh2vFrNkPX4lN44Pznh1faPVZKsl8I773nK47zsdJ8uvJGcqTDMdJfrqO0Zs314usAAAAASUVORK5CYII=");
+}
+.minus {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAALCAYAAAAndj5aAAAAiElEQVRIieXWwQ3CMBBE0T+uIKVQQqiEdBJSSUglMR1AJ+5guACiARgJv5Pl07dWshY6pdfB9gjMwAEYYkXfU4GLpO19Y3t2P2YA2Z6ANTSFlKNs78CYLvmxKttOVwS0ArR0RcBQgFu6IuBagCVdEbAWSZW+Hr9I2j4XmAk48Z8/fAPuwPk5aB5j4g8snESafQAAAABJRU5ErkJggg==");
+}
+
 .totalPrice{
     display: flex;
     flex-direction: column;
@@ -91,23 +122,25 @@ header {
     width: 50px;
     cursor: pointer;
     rotate: 90deg;
-    transition: all 0.5s ease;
+    transition: all 1s ease;
     position: sticky;
     margin-top: 18px;
     top: 18px;
 }
 .product {
     margin: 15px 35px;
-    height: fit-content;
-    width: 319px;
+    height: 500px;
+    width: 477px;
     background-color: #723da4;
     border-radius: 10px;
 }
-.prodInfo {
-    padding: 0 10px 10px;
+.productInfo {
     height: fit-content;
     border-radius: 0 0 10px 10px;
     background-color: #723da4;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 .productFrame {
     display: flex;
@@ -116,17 +149,33 @@ header {
     border-radius: 10px 10px 0 0;
     width: 100%;
     height: 80%;
-    max-width: 350px;
     max-height: 200px;
-
 }
 .productImg {
     border-radius: 10px 10px 0 0;
     height: 199.16px;
-    max-width: 100%;
+}
+.productTitleBlock {
+    margin: 5px 0;
 }
 .productTitle {
     text-align: center;
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 54px;
+}
+.productDescr {
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0 15px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: 72.5px
 }
 .productPrice {
     display: flex;
@@ -138,9 +187,23 @@ header {
     display: flex;
     flex-direction: row;
     position: relative;
-    left: 15px;
+    left: 17px;
 }
 .productCategory {
     position: relative;
-    left: 15px;
+    left: 17px;
+}
+.productButton {
+    color: white;
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 25px;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    background-color: #c49ce0;
+    text-align: center;
+    height: 71px;
+    border: none;
+}
+.productButton:hover {
+    background-color: #ac8bc7;
 }
