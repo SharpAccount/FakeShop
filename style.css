@@ -1,5 +1,5 @@
 body {
-    background-color: #b08fbd;
+    background-color: #605160;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
@@ -27,6 +27,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    justify-content: start;
 }
 header {
     font-size: 25px;
@@ -37,10 +38,9 @@ header {
 }
 .prods {
     width: fit-content;
-    background-color: #723da4;
     border-radius: 10px;
     padding: 0 2px;
-    color: #b08fbd;
+    color: white;
 }
 #sidebarTerritory {
     display: flex;
@@ -48,7 +48,7 @@ header {
     flex-direction: row;
     transition: left 0.8s ease-in-out;
     left: 0;
-    width: 255px;
+    width: 278px;
 }
 #sidebar {
     display: block;
@@ -82,6 +82,7 @@ header {
     overflow-x: hidden;
     flex-direction: column;
     max-height: 50%;
+    width: 215px;
 }
 .sidebarElement {
     display: flex;
@@ -150,9 +151,9 @@ header {
     background-color: #cbc7c7;
 }
 .product {
-    margin: 15px 35px;
+    margin: 10px;
     height: 500px;
-    width: 470px;
+    max-width: 470px;
     background-color: #723da4;
     border-radius: 10px;
 }
