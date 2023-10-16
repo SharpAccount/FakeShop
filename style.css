@@ -34,7 +34,6 @@ header {
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 100%;
 }
 .prods {
     width: fit-content;

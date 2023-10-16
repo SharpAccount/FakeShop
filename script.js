@@ -4,11 +4,6 @@ function startAnim() {
         const button = document.getElementById('sidebarIcon');
         const pathToMove = -1 * sidebar.clientWidth - 2;
         const sideBarPosition = fullSidebar.getBoundingClientRect();
-        console.log(fullSidebar);
-    console.log(sidebar);
-    console.log(button);
-    console.log(pathToMove);
-    console.log(sideBarPosition);
         if (sideBarPosition.left === pathToMove) {
             button.style.rotate = "90deg"
             fullSidebar.style.left = "0";
