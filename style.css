@@ -1,17 +1,18 @@
 body {
-    background-color: #976ab2;
+    background-color: #b08fbd;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
 }
-
 h1 {
     margin: 0;
+}
+h3 {
+    margin: 8px 0 10px 0;
 }
 hr {
     border-top: none;
     margin: 0;
-
 }
 p {
     margin: 10px 0;
@@ -25,20 +26,27 @@ p {
 #products{
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     position: relative;
 }
 header {
     font-size: 25px;
     height: 100%;
-    background-color: #723da4;
+    display: flex;
+    justify-content: center;
     text-align: center;
     width: 100%;
 }
+.prods {
+    width: fit-content;
+    background-color: #723da4;
+    border-radius: 10px;
+    padding: 0 2px;
+    color: #b08fbd;
+}
 #sidebarTerritory {
     display: flex;
-    flex-direction: row;
     position: relative;
+    flex-direction: row;
     transition: left 0.8s ease-in-out;
     left: 0;
     width: 255px;
@@ -53,6 +61,7 @@ header {
     height: 100vh;
     position: sticky;
     top: 0;
+    border-radius: 10px;
 }
 .sidebarHeader {
     text-align: center;
@@ -69,11 +78,11 @@ header {
     border-top: #bdbbbb solid 2px;
     margin: 0;
 }
-.sidebarProducts {
+#sidebarProducts {
     overflow-y: auto;
     overflow-x: hidden;
     flex-direction: column;
-    max-height: 30%;
+    max-height: 50%;
 }
 .sidebarElement {
     display: flex;
@@ -84,10 +93,36 @@ header {
     flex-direction: column;
     border-bottom: #bdbbbb solid 1px;
 }
-.sidebarLastElement {
+.amount {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
 }
+.productNums {
+    font-size: 23px;
+}
+.productPositionPrice {
+    display: flex;
+    flex-direction: row;
+}
+.sign {
+    background-size: cover;
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+    background-position: center;
+}
+.plus {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAA/CAYAAABXXxDfAAABOklEQVRoge3b0W3CQBCE4VkqCB2RSqATm0pQKrHpIKkEdzB58N0DEhhL5G6d2/mekbw/GJBYDpC6SB5IDiRvnA0kj95zFUey43Od93zFkDwthGcH7zmLSLf3K0OteazWhQCAJFc8bDKzffFhsM14mFmVuXY1LrJVio9K8VEpPirFR6X4qBQfleKjUnxUio9K8dmDTcqfWjtUiWsnjzdDXN6ktKYD0k/XJE8ALu/dRP/OZ44fALS5JnpuzPGr348NmfIH3uQ6ho+PHP/tOoaPa44/u47h47IDADMbEesJOJvZ1902NH3lHdHmJ/8E4AdAn15srajDUnxUio9K8VEpPirFR6X4qBQfleKjUnxUiq9oU5uh2vFrNkPX4lN44Pznh1faPVZKsl8I773nK47zsdJ8uvJGcqTDMdJfrqO0Zs314usAAAAASUVORK5CYII=");
+}
+.minus {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAALCAYAAAAndj5aAAAAiElEQVRIieXWwQ3CMBBE0T+uIKVQQqiEdBJSSUglMR1AJ+5guACiARgJv5Pl07dWshY6pdfB9gjMwAEYYkXfU4GLpO19Y3t2P2YA2Z6ANTSFlKNs78CYLvmxKttOVwS0ArR0RcBQgFu6IuBagCVdEbAWSZW+Hr9I2j4XmAk48Z8/fAPuwPk5aB5j4g8snESafQAAAABJRU5ErkJggg==");
+}
+
 .totalPrice{
     display: flex;
     flex-direction: column;
@@ -102,10 +137,23 @@ header {
     margin-top: 18px;
     top: 18px;
 }
+#buyButton {
+    background-color: white;
+    font-family: 'Dela Gothic One', cursive;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    margin: 18.7px 0;
+}
+#buyButton:hover {
+    background-color: #cbc7c7;
+}
 .product {
     margin: 15px 35px;
     height: 500px;
-    width: 479px;
+    width: 470px;
     background-color: #723da4;
     border-radius: 10px;
 }
@@ -169,13 +217,16 @@ header {
     left: 17px;
 }
 .productButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     font-size: 25px;
     width: 100%;
     border-radius: 0 0 10px 10px;
     background-color: #c49ce0;
-    text-align: center;
     height: 71px;
     border: none;
 }

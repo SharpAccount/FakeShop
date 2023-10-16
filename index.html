@@ -10,53 +10,31 @@
 </head>
 <body>
     <header>
-        <h1>PRODUCTS:</h1>
+        <h1 class = "prods">PRODUCTS:</h1>
     </header>
     <div id = "wrapper">
         <div id = "sidebarTerritory">
             <div id = "sidebar">
-                <div class = "sidebarHeader">
-                    <h1>Cart</h1>
-                </div>
+                <div class = "sidebarHeader"><h1>Cart</h1></div>
                 <h2>Products:</h2>
-                <hr class = "sepLine">
+                <!--<hr class = "sepLine">-->
+                <div id = "sidebarProducts">
                 <div class = "sidebarProducts">
-                    <div class = "sidebarElement">
-                            <div class = "sidebarElementInfo">
-                                <p>Name:</p><p> Product name</p>
-                            </div>
-                            <div class = "sidebarElementInfo">
-                                <p>Amount:</p><p>99pcs</p>
-                            </div>
-                                <div class = "sidebarLastElement">
-                            <p>Price:</p><p>$99999</p>
-                        </div>
-                    </div>
                 </div>
                 <hr>
+            </div>
                 <div class = "totalPrice">
                     <h2>Total price:</h2>
-                    <h3>$999</h3>
+                    <div class = "productPositionPrice">
+                        <h3>$</h3><h3 id = "totalPrice">0</h3>
+                    </div>
+                    <hr>
+                    <button id = "buyButton">Buy</button>
                 </div>
             </div>
             <img onclick="startAnim()" id = "sidebarIcon" src = "https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg" alt="none">
         </div>
-        <div id = "products">
-                <!--<div class = "product">
-                    <img class = "productImg" src="" alt = "none">
-                    <div class = "prodInfo">
-                        <h2 class = "productTitle">Title</h2>
-                        <div class = "productPrice">
-                            <p>Price:</p>
-                            <p>$999.99</p>
-                        </div>
-                        <div class = "productRating">
-                            <p>Rating:</p>
-                            <p>5</p><p>/5</p>
-                        </div>
-                        <p class = "productCategory">category</p>
-                    </div>
-                </div>-->
+            <div id = "products">
         </div>
     </div>
     <script src="script.js"></script>
