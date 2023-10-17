@@ -1,3 +1,7 @@
+function hideSidebar() {
+    document.getElementById('sidebarTerritory').style.left = "-222px"
+}
+hideSidebar();
 function startAnim() {
         const fullSidebar = document.getElementById('sidebarTerritory');
         const sidebar = document.getElementById('sidebar');
@@ -5,13 +9,16 @@ function startAnim() {
         const pathToMove = -1 * sidebar.clientWidth - 2;
         const sideBarPosition = fullSidebar.getBoundingClientRect();
         if (sideBarPosition.left === pathToMove) {
-            button.style.rotate = "90deg"
+            button.style.rotate = "90deg";
+            button.style.left = "160px";
+            sidebar.style.left = "0";
             fullSidebar.style.left = "0";
-            console.log('did1');
         } else if(sideBarPosition.left === 0) {
-            button.style.rotate = "270deg"
+            button.style.rotate = "270deg";
+            button.style.left = "0";
+            sidebar.style.left =  pathToMove + "px";
             fullSidebar.style.left = pathToMove + "px";
-            console.log('did2');
+            // add rgba(23, 23, 23, 0.6) to <div id = "filter"><div> to wrapper
         }
 }
 
@@ -29,7 +36,6 @@ getProducts().then(products => {
         const productTitle = document.createElement('h3');
         const separateLine = document.createElement('hr');
         const description = document.createElement('p');
-        const productBlockPrice = document.createElement('div');
         const productPriceValue = document.createElement('p');
         const productBlockRating = document.createElement('div');
         const productRating = document.createElement('p');
@@ -38,6 +44,7 @@ getProducts().then(products => {
         const productAddToCartButton = document.createElement('button')
         const wrapper = document.getElementById('products');
 
+        productImageFrame.setAttribute('background-image', 'url(' + item['image'] + ')')
         productImage.src = item['image'];
         productTitle.textContent = item['title'];
         description.textContent = item['description'];
@@ -61,7 +68,6 @@ getProducts().then(products => {
         productBlockTitle.className = 'productTitleBlock';
         productTitle.className = 'productTitle';
         description.className = 'productDescr';
-        productBlockPrice.className = 'productPrice';
         productBlockRating.className = 'productRating';
         productCategory.className = 'productCategory';
         productAddToCartButton.className = 'productButton';
@@ -77,7 +83,6 @@ getProducts().then(products => {
         productBlockInfo.append(productBlockTitle);
         productBlockInfo.append(separateLine);
         productBlockInfo.append(description);
-        productBlockInfo.append(productBlockPrice);
         productBlockInfo.append(productBlockRating);
         productBlockInfo.append(productCategory);
         productBlockInfo.append(productAddToCartButton);

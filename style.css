@@ -1,5 +1,5 @@
 body {
-    background-color: #605160;
+    background-color: #976ab2;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
@@ -23,11 +23,18 @@ p {
     flex-direction: row;
     width: 100%;
 }
-#products{
+#products {
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    justify-content: start;
+    width: 85%;
+    left: 3.5%;
+}
+#filter {
+    background: none;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
 }
 header {
     font-size: 25px;
@@ -40,27 +47,30 @@ header {
     width: fit-content;
     border-radius: 10px;
     padding: 0 2px;
+    background-color: #723da4;
     color: white;
 }
 #sidebarTerritory {
     display: flex;
-    position: relative;
+    position: fixed;
     flex-direction: row;
-    transition: left 0.8s ease-in-out;
+    transition: left 1s ease;
     left: 0;
-    width: 278px;
+
 }
 #sidebar {
     display: block;
     background-color: #723da4;
     flex-direction: column;
     padding: 10px;
-    width: 215px;
+    width: 200px;
     white-space: nowrap;
     height: 100vh;
-    position: sticky;
+    position: fixed;
     top: 0;
+    bottom: -10px;
     border-radius: 10px;
+    transition: left 1s ease;
 }
 .sidebarHeader {
     text-align: center;
@@ -69,7 +79,6 @@ header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     padding: 15px 10px;
 }
@@ -82,7 +91,7 @@ header {
     overflow-x: hidden;
     flex-direction: column;
     max-height: 50%;
-    width: 215px;
+
 }
 .sidebarElement {
     display: flex;
@@ -131,11 +140,12 @@ header {
     height: 50px;
     width: 50px;
     cursor: pointer;
-    rotate: 90deg;
+    rotate: 270deg;
     transition: all 1s ease;
-    position: sticky;
+    position: fixed;
     margin-top: 18px;
-    top: 18px;
+    top: 6px;
+    left: 0;
 }
 #buyButton {
     background-color: white;
@@ -153,7 +163,8 @@ header {
 .product {
     margin: 10px;
     height: 500px;
-    max-width: 470px;
+    max-width: 385px;
+    width: 100%;
     background-color: #723da4;
     border-radius: 10px;
 }
@@ -200,21 +211,14 @@ header {
     -webkit-box-orient: vertical;
     height: 72.5px
 }
-.productPrice {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    left: 15px;
-}
+
 .productRating {
     display: flex;
     flex-direction: row;
-    position: relative;
-    left: 17px;
+    padding-left: 17px;
 }
 .productCategory {
-    position: relative;
-    left: 17px;
+    padding-left: 17px;
 }
 .productButton {
     display: flex;
