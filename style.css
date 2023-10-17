@@ -1,5 +1,5 @@
 body {
-    background-color: #976ab2;
+    background-color: #885fa1;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
@@ -19,16 +19,10 @@ p {
 }
 #wrapper {
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    width: 100%;
-}
-#products {
-    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     position: relative;
-    width: 85%;
-    left: 3.5%;
+    margin: 0 10%;
 }
 #filter {
     background: none;
@@ -163,8 +157,7 @@ header {
 .product {
     margin: 10px;
     height: 500px;
-    max-width: 385px;
-    width: 100%;
+    max-width: 32%;
     background-color: #723da4;
     border-radius: 10px;
 }
@@ -236,4 +229,7 @@ header {
 }
 .productButton:hover {
     background-color: #ac8bc7;
+}
+@media screen and (max-width: 980px) {
+    
 }

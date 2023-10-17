@@ -42,7 +42,7 @@ getProducts().then(products => {
         const productRatingValue = document.createElement('p');
         const productCategory = document.createElement('p');
         const productAddToCartButton = document.createElement('button')
-        const wrapper = document.getElementById('products');
+        const wrapper = document.getElementById('wrapper');
 
         productImageFrame.setAttribute('background-image', 'url(' + item['image'] + ')')
         productImage.src = item['image'];
@@ -199,7 +199,9 @@ function removeProductFromSidebar(id, price) {
 }
 function increaseAmount(_id, _price) {
 
+    console.log(returnAmountPriceTotal(1, _id).textContent);
     returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) + 1).toString();
+    console.log(returnAmountPriceTotal(1, _id).textContent);
     returnAmountPriceTotal(2, _id).textContent = ((Math.round((parseFloat(returnAmountPriceTotal(2, _id).textContent) + _price) * 100)) / 100).toFixed(2);
     cartPrice = Math.round((cartPrice + _price) * 100) / 100;
 
@@ -219,8 +221,8 @@ function decreaseAmount(_id, _price) {
     returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
 }
 function returnAmountPriceTotal(elem, index) {
-    if (elem === 1) return document.querySelector('[data-number="'+ index +'"]');
-    if (elem === 2) return document.querySelector('[data-number="'+ "P0" + index +'"]');
-    if (elem === 4) return document.querySelector('[data-number="'+ "00" + index +'"]');
+    if (elem === 1) return document.querySelectorAll('[data-number="'+ index +'"]')[document.querySelectorAll('[data-number="'+ index +'"]').length - 1];
+    if (elem === 2) return document.querySelectorAll('[data-number="'+ "P0" + index +'"]')[document.querySelectorAll('[data-number="'+ "P0" + index +'"]').length - 1];
+    if (elem === 4) return document.querySelectorAll('[data-number="'+ "00" + index +'"]')[document.querySelectorAll('[data-number="'+ "00" + index +'"]').length - 1];
     if (elem === 3) return document.getElementById('totalPrice');
 }
