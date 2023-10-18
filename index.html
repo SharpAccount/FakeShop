@@ -10,26 +10,32 @@
 </head>
 <body>
     <header>
-        <h1 class="prods">PRODUCTS:</h1>
+        <h1 class = "prods">PRODUCTS:</h1>
     </header>
-    <div id="wrapper"></div>
-    <div id="sidebar">
-        <h1 class="sidebarHeader">Cart</h1>
-        <h2>Products:</h2>
-        <div id="sidebarProducts">
-            <div class="sidebarProducts"></div>
-            <hr>
-        </div>
-        <div class="totalPrice">
-            <h2>Total price:</h2>
-            <div class="productPositionPrice">
-                <h3>$</h3><h3 id="totalPrice">0</h3>
-            </div>
-            <hr>
-            <button id="buyButton">Buy</button>
+    <div id = "wrapper">
+            <div id = "products">
         </div>
     </div>
-    <img id="sidebarIcon" src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg" alt="none">
+    <div id = "sidebarTerritory">
+        <div id = "sidebar">
+            <div class = "sidebarHeader"><h1>Cart</h1></div>
+            <h2>Products:</h2>
+            <div id = "sidebarProducts">
+                <div class = "sidebarProducts">
+                </div>
+                <hr>
+            </div>
+            <div class = "totalPrice">
+                <h2>Total price:</h2>
+                <div class = "productPositionPrice">
+                    <h3>$</h3><h3 id = "totalPrice">0</h3>
+                </div>
+                <hr>
+                <button id = "buyButton">Buy</button>
+            </div>
+        </div>
+        <img onclick="startAnim()" id = "sidebarIcon" src = "https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg" alt="none">
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
