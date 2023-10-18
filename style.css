@@ -1,5 +1,5 @@
 body {
-    background-color: #976ab2;
+    background-color: #885fa1;
     color: white;
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
@@ -19,22 +19,10 @@ p {
 }
 #wrapper {
     display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    width: 100%;
-}
-#products {
-    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     position: relative;
-    width: 85%;
-    left: 3.5%;
-}
-#filter {
-    background: none;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
+    margin: 0 11%;
 }
 header {
     font-size: 25px;
@@ -49,28 +37,6 @@ header {
     padding: 0 2px;
     background-color: #723da4;
     color: white;
-}
-#sidebarTerritory {
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    transition: left 1s ease;
-    left: 0;
-
-}
-#sidebar {
-    display: block;
-    background-color: #723da4;
-    flex-direction: column;
-    padding: 10px;
-    width: 200px;
-    white-space: nowrap;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    bottom: -10px;
-    border-radius: 10px;
-    transition: left 1s ease;
 }
 .sidebarHeader {
     text-align: center;
@@ -141,12 +107,27 @@ header {
     width: 50px;
     cursor: pointer;
     rotate: 270deg;
-    transition: all 1s ease;
+    transition: all 1s ;
     position: fixed;
     margin-top: 18px;
     top: 6px;
     left: 0;
 }
+
+#sidebar {
+    background-color: #723da4;
+    padding: 10px;
+    width: 200px;
+    white-space: nowrap;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: -10px;
+    border-right: 1px solid #836c98;
+    transition: left 1s;
+    left: -222px;
+}
+
 #buyButton {
     background-color: white;
     font-family: 'Dela Gothic One', cursive;
@@ -155,18 +136,19 @@ header {
     cursor: pointer;
     border-radius: 10px;
     border: none;
-    margin: 18.7px 0;
+    margin: 18px 0;
 }
 #buyButton:hover {
     background-color: #cbc7c7;
 }
 .product {
-    margin: 10px;
+    margin: 7px 7px 14px;
     height: 500px;
-    max-width: 385px;
-    width: 100%;
+    max-width: 32%;
+    min-width: 385px;
     background-color: #723da4;
     border-radius: 10px;
+    box-sizing: border-box;
 }
 .productInfo {
     height: fit-content;
@@ -187,10 +169,12 @@ header {
 }
 .productImg {
     border-radius: 10px 10px 0 0;
-    height: 199.16px;
+    max-width: 100%;
+    max-height: 199px;
+    object-fit: contain;
 }
 .productTitleBlock {
-    margin: 5px 0;
+    margin: 5px;
 }
 .productTitle {
     text-align: center;
@@ -209,7 +193,7 @@ header {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    height: 72.5px
+    height: 73px
 }
 
 .productRating {
@@ -236,4 +220,44 @@ header {
 }
 .productButton:hover {
     background-color: #ac8bc7;
+}
+@media screen and (max-width: 1580px) {
+    #wrapper {
+        margin: 0 5%;
+    }
+    .product {
+        max-width: 20%;
+    }
+}
+@media screen and (max-width: 1346px) {
+    .product {
+        max-width: 48%;
+    }
+}
+@media screen and (max-width: 903px) {
+    .product {
+        max-width: 82%;
+    }
+}
+@media screen and (max-width: 470px) {
+    .prods {
+        font-size: 40px;
+    }
+    .product {
+        min-width: 275px;
+    }
+    .productButton {
+        font-size: 21px;
+    }
+}
+@media screen and (max-width: 430px) {
+    .prods {
+        font-size: 33px;
+    }
+    .product {
+        min-width: 251px;
+    }
+    .productButton {
+        font-size: 17px;
+    }
 }
