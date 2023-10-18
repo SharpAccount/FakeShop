@@ -1,26 +1,21 @@
-function hideSidebar() {
-    document.getElementById('sidebarTerritory').style.left = "-222px"
-}
-hideSidebar();
 function startAnim() {
-        const fullSidebar = document.getElementById('sidebarTerritory');
-        const sidebar = document.getElementById('sidebar');
-        const button = document.getElementById('sidebarIcon');
-        const pathToMove = -1 * sidebar.clientWidth - 2;
-        const sideBarPosition = fullSidebar.getBoundingClientRect();
-        if (sideBarPosition.left === pathToMove) {
-            button.style.rotate = "90deg";
-            button.style.left = "160px";
-            sidebar.style.left = "0";
-            fullSidebar.style.left = "0";
-        } else if(sideBarPosition.left === 0) {
-            button.style.rotate = "270deg";
-            button.style.left = "0";
-            sidebar.style.left =  pathToMove + "px";
-            fullSidebar.style.left = pathToMove + "px";
-            // add rgba(23, 23, 23, 0.6) to <div id = "filter"><div> to wrapper
-        }
+    const sidebar = document.getElementById('sidebar');
+    const button = document.getElementById('sidebarIcon');
+    const sideBarPosition = sidebar.offsetLeft;
+    if (sideBarPosition === -222) {
+        sidebar.style.left = "0";
+        button.style.rotate = "90deg";
+        button.style.left = "160px";
+    } else if(sideBarPosition === 0) {
+        sidebar.style.left =  "-222px";
+        button.style.rotate = "270deg";
+        button.style.left = "0";
+    }
 }
+
+document.getElementById('sidebarIcon').addEventListener('click', () => {
+    startAnim();
+})
 
 async function getProducts() {
     return (await fetch('https://fakestoreapi.com/products')).json();
@@ -42,9 +37,8 @@ getProducts().then(products => {
         const productRatingValue = document.createElement('p');
         const productCategory = document.createElement('p');
         const productAddToCartButton = document.createElement('button')
-        const wrapper = document.getElementById('products');
+        const wrapper = document.getElementById('wrapper');
 
-        productImageFrame.setAttribute('background-image', 'url(' + item['image'] + ')')
         productImage.src = item['image'];
         productTitle.textContent = item['title'];
         description.textContent = item['description'];
@@ -56,6 +50,7 @@ getProducts().then(products => {
 
         productAddToCartButton.setAttribute("data-number", item["id"]);
         productPriceValue.setAttribute("data-number", "0" + item["id"]);
+        productImage.setAttribute('alt', '');
 
         productAddToCartButton.addEventListener("click", () => {
             addProductToSidebar(productAddToCartButton.getAttribute("data-number"), item['title'], item['price'])
@@ -199,7 +194,9 @@ function removeProductFromSidebar(id, price) {
 }
 function increaseAmount(_id, _price) {
 
+    console.log(returnAmountPriceTotal(1, _id).textContent);
     returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) + 1).toString();
+    console.log(returnAmountPriceTotal(1, _id).textContent);
     returnAmountPriceTotal(2, _id).textContent = ((Math.round((parseFloat(returnAmountPriceTotal(2, _id).textContent) + _price) * 100)) / 100).toFixed(2);
     cartPrice = Math.round((cartPrice + _price) * 100) / 100;
 
@@ -219,8 +216,8 @@ function decreaseAmount(_id, _price) {
     returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
 }
 function returnAmountPriceTotal(elem, index) {
-    if (elem === 1) return document.querySelector('[data-number="'+ index +'"]');
-    if (elem === 2) return document.querySelector('[data-number="'+ "P0" + index +'"]');
-    if (elem === 4) return document.querySelector('[data-number="'+ "00" + index +'"]');
+    if (elem === 1) return document.querySelectorAll('[data-number="'+ index +'"]')[document.querySelectorAll('[data-number="'+ index +'"]').length - 1];
+    if (elem === 2) return document.querySelectorAll('[data-number="'+ "P0" + index +'"]')[document.querySelectorAll('[data-number="'+ "P0" + index +'"]').length - 1];
+    if (elem === 4) return document.querySelectorAll('[data-number="'+ "00" + index +'"]')[document.querySelectorAll('[data-number="'+ "00" + index +'"]').length - 1];
     if (elem === 3) return document.getElementById('totalPrice');
 }
