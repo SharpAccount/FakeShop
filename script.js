@@ -1,20 +1,25 @@
-function startAnim() {
+function startAnim(isOpened) {
     const sidebar = document.getElementById('sidebar');
     const button = document.getElementById('sidebarIcon');
-    const sideBarPosition = sidebar.offsetLeft;
-    if (sideBarPosition === -222) {
-        sidebar.style.left = "0";
-        button.style.rotate = "90deg";
-        button.style.left = "160px";
-    } else if(sideBarPosition === 0) {
-        sidebar.style.left =  "-222px";
-        button.style.rotate = "270deg";
-        button.style.left = "0";
+    if (isOpened === true) {
+        sidebar.className = "sidebarClosed";
+        button.className = "sidebarIconClosed";
+    } else {
+        sidebar.className = "sidebar";
+        button.className = "sidebarIcon";
     }
 }
 
+let isOpened = false;
+
 document.getElementById('sidebarIcon').addEventListener('click', () => {
-    startAnim();
+    if (isOpened === false){
+        startAnim(false);
+        isOpened = true;
+    } else {
+        startAnim(true);
+        isOpened = false;
+    }
 })
 
 async function getProducts() {
@@ -24,48 +29,58 @@ async function getProducts() {
 getProducts().then(products => {
     products.forEach((item) => {
         const productBlock = document.createElement('div');
-        const productImageFrame = document.createElement('div');
-        const productImage = document.createElement('img');
-        const productBlockInfo = document.createElement('div');
-        const productBlockTitle = document.createElement('div');
-        const productTitle = document.createElement('h3');
-        const separateLine = document.createElement('hr');
-        const description = document.createElement('p');
-        const productPriceValue = document.createElement('p');
-        const productBlockRating = document.createElement('div');
-        const productRating = document.createElement('p');
-        const productRatingValue = document.createElement('p');
-        const productCategory = document.createElement('p');
-        const productAddToCartButton = document.createElement('button')
-        const wrapper = document.getElementById('wrapper');
-
-        productImage.src = item['image'];
-        productTitle.textContent = item['title'];
-        description.textContent = item['description'];
-        productRating.textContent = 'Rating: ';
-        productRatingValue.textContent = item['rating']['rate'] + '/5';
-        productCategory.textContent = item['category']
-        productAddToCartButton.textContent = 'Add to cart' + " for " + "$";
-        productPriceValue.textContent = item['price']
-
-        productAddToCartButton.setAttribute("data-number", item["id"]);
-        productPriceValue.setAttribute("data-number", "0" + item["id"]);
-        productImage.setAttribute('alt', '');
-
-        productAddToCartButton.addEventListener("click", () => {
-            addProductToSidebar(productAddToCartButton.getAttribute("data-number"), item['title'], item['price'])
-        });
-
         productBlock.className = 'product';
+
+        const productImageFrame = document.createElement('div');
         productImageFrame.className = 'productFrame';
+
+        const productImage = document.createElement('img');
+        productImage.src = item.image;
+        productImage.setAttribute('alt', '');
         productImage.className = 'productImg';
+
+        const productBlockInfo = document.createElement('div');
         productBlockInfo.className = 'productInfo';
+
+        const productBlockTitle = document.createElement('div');
         productBlockTitle.className = 'productTitleBlock';
+
+        const productTitle = document.createElement('h3');
+        productTitle.textContent = item.title;
         productTitle.className = 'productTitle';
+
+        const separateLine = document.createElement('hr');
+
+        const description = document.createElement('p');
+        description.textContent = item.description;
         description.className = 'productDescr';
+
+        const productPriceValue = document.createElement('p');
+        productPriceValue.textContent = item.price;
+        productPriceValue.setAttribute("id", "Price" + item.id);
+
+        const productBlockRating = document.createElement('div');
         productBlockRating.className = 'productRating';
+
+        const productRating = document.createElement('p');
+
+        const productRatingValue = document.createElement('p');
+        productRating.textContent = 'Rating: ';
+        productRatingValue.textContent = item.rating.rate + '/5';
+
+        const productCategory = document.createElement('p');
+        productCategory.textContent = item.category;
         productCategory.className = 'productCategory';
+
+        const productAddToCartButton = document.createElement('button')
+        productAddToCartButton.textContent = 'Add to cart' + " for " + "$";
+        productAddToCartButton.setAttribute("id", "Product" + item.id);
+        productAddToCartButton.addEventListener("click", () => {
+            addProductToSidebar(productAddToCartButton.getAttribute("id"), item.title, item.price)
+        });
         productAddToCartButton.className = 'productButton';
+
+        const wrapper = document.getElementById('wrapper');
 
         productBlockRating.append(productRating);
         productBlockRating.append(productRatingValue);
@@ -73,6 +88,7 @@ getProducts().then(products => {
         productAddToCartButton.append(productPriceValue);
 
         productImageFrame.append(productImage);
+
         productBlockTitle.append(productTitle);
 
         productBlockInfo.append(productBlockTitle);
@@ -86,91 +102,113 @@ getProducts().then(products => {
         productBlock.append(productBlockInfo);
 
         wrapper.append(productBlock);
-
     })
 })
 
-let cart = {};
-let cartPrice = 0;
+const cart = {
+    products: [],
+    price: 0,
+};
+
 const buyButton = document.getElementById('buyButton');
+const totalPrice = document.getElementById('totalPrice');
 
 buyButton.addEventListener('click', ()=>{
-    if(Object.keys(cart).length > 0) {
-        for(let i = 0; i < Object.keys(cart).length; i+=0) {
-            removeProductFromSidebar(Object.keys(cart)[i], returnAmountPriceTotal(2, Object.keys(cart)[i]).textContent);
-        }
+    if(cart.price > 0) {
+        cart.forEach(prod => {
+            console.log(prod);
+            removeProductFromSidebar(prod.id, prod.price);
+        })
         alert("Thanks for purchase!");
     }
 })
 
 function addProductToSidebar(id, title, price) {
-
-    if (cart[id] > 0) {
+    if (cart.products[id]) {
         increaseAmount(id, price);
         return;
     }
 
-    cart[id] = 1;
-    cartPrice += price;
+    const product = {
+        id: id,
+        price: price,
+        amount: 1,
+    }
+
+    cart.products[id] = product;
+    cart.price += Math.round((cart.products[id].price) * 100) / 100;
 
     const Element = document.createElement('div');
-    const sideBarProduct = document.createElement('div');
-    const productNameBlock = document.createElement('div');
-    const productName = document.createElement('h3');
-    const productNameValue = document.createElement('p');
-    const AmountBlock = document.createElement('div');
-    const productAmount = document.createElement('h3');
-    const productAmountBlock = document.createElement('div');
-    const plusSign = document.createElement('div');
-    const productAmountValue = document.createElement('p');
-    const minusSign = document.createElement('div');
-    const productsPriceBlock = document.createElement('div');
-    const productsPrice = document.createElement('h3');
-    const productsPriceValueBlock = document.createElement('div');
-    const productsPriceValue = document.createElement('p');
-    const sideBar = document.getElementById('sidebarProducts');
-    const totalPrice = document.getElementById('totalPrice');
-    const dollarSign = document.createElement('p');
+    Element.className = "sidebarElement";
+    Element.setAttribute('id', "Element" + id);
 
+    const sideBarProduct = document.createElement('div');
     sideBarProduct.className = "sidebarElement";
+
+    const productNameBlock = document.createElement('div');
     productNameBlock.className = "sidebarElementInfo";
-    AmountBlock.className = "sidebarElementInfo"
+
+    const productName = document.createElement('h3');
+    productName.textContent = "Name";
+
+    const productNameValue = document.createElement('p');
+    productNameValue.textContent = title;
+
+    const AmountBlock = document.createElement('div');
+    AmountBlock.className = "sidebarElementInfo";
+
+    const productAmount = document.createElement('h3');
+    productAmount.setAttribute("id", "Amount" + title.id)
+    productAmount.textContent = "Amount";
+
+    const productAmountBlock = document.createElement('div');
     productAmountBlock.className = "amount";
+
+    const plusSign = document.createElement('div');
     plusSign.classList.add("sign");
     plusSign.classList.add("plus");
-    productAmountValue.className = "productNums";
-    minusSign.classList.add("sign");
-    minusSign.classList.add("minus");
-    productsPriceBlock.className = "sidebarElementInfo";
-    productsPriceValueBlock.className = "productPositionPrice";
-    productsPrice.className = "sidebarLastElement";
-    dollarSign.className = "productNums";
-    productsPriceValue.className = "productNums";
-    Element.className = "sidebarElement";
-
-    dollarSign.textContent = "$";
-
-    productAmountValue.setAttribute('data-number', "" + id);
-    productsPriceValue.setAttribute('data-number', "P0" + id);
-    Element.setAttribute('data-number', "00" + id);
-
     plusSign.addEventListener('click', () => {
         increaseAmount(id, price);
     })
+
+    const minusSign = document.createElement('div');
+    minusSign.classList.add("sign");
+    minusSign.classList.add("minus");
     minusSign.addEventListener('click', () => {
         decreaseAmount(id, price);
     })
 
+    const productAmountValue = document.createElement('p');
+    productAmountValue.className = "productNums";
+    productAmountValue.setAttribute('id', "Amount" + id);
+    productAmountValue.textContent = cart.products[id].amount;
 
-    productName.textContent = "Name";
-    productNameValue.textContent = title;
-    productAmount.textContent = "Amount";
-    productAmountValue.textContent = cart[id];
+    const productsPriceBlock = document.createElement('div');
+    productsPriceBlock.className = "sidebarElementInfo";
+
+    const productsPrice = document.createElement('h3');
+    productsPrice.className = "sidebarLastElement";
     productsPrice.textContent = "Price:";
-    productsPriceValue.textContent = price.toFixed(2);
-    totalPrice.textContent = cartPrice.toFixed(2);
+
+    const productsPriceValueBlock = document.createElement('div');
+    productsPriceValueBlock.className = "productPositionPrice";
+
+    const productsPriceValue = document.createElement('p');
+    productsPriceValue.className = "productNums";
+    productsPriceValue.setAttribute('id', "Price" + id);
+    productsPriceValue.textContent = price;
+
+    const sideBar = document.getElementById('sidebarProducts');
+
+    totalPrice.textContent = cart.price;
+
+    const dollarSign = document.createElement('p');
+    dollarSign.className = "productNums";
+    dollarSign.textContent = "$";
+
 
     productAmountBlock.append(plusSign, productAmountValue, minusSign);
+
     AmountBlock.append(productAmount, productAmountBlock);
 
     productNameBlock.append(productName, productNameValue);
@@ -180,44 +218,41 @@ function addProductToSidebar(id, title, price) {
     productsPriceBlock.append(productsPrice, productsPriceValueBlock);
 
     Element.append(productNameBlock, AmountBlock, productsPriceBlock);
+
     sideBar.append(Element);
-
 }
+
 function removeProductFromSidebar(id, price) {
+    cart.price = Math.abs(Math.round((cart.price - price) * 100) / 100);
+    delete cart.products[id];
 
-    cartPrice = Math.abs(cartPrice - price);
-    delete cart[id];
+    const toRemove = document.getElementById("Element" + id);
+    toRemove.remove();
 
-    returnAmountPriceTotal(3, id).textContent = (cartPrice).toFixed(2);
-
-    returnAmountPriceTotal(4, id).remove();
+    totalPrice.textContent = cart.price;
 }
-function increaseAmount(_id, _price) {
 
-    console.log(returnAmountPriceTotal(1, _id).textContent);
-    returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) + 1).toString();
-    console.log(returnAmountPriceTotal(1, _id).textContent);
-    returnAmountPriceTotal(2, _id).textContent = ((Math.round((parseFloat(returnAmountPriceTotal(2, _id).textContent) + _price) * 100)) / 100).toFixed(2);
-    cartPrice = Math.round((cartPrice + _price) * 100) / 100;
+function increaseAmount(id, price) {
+    const prodAmount = document.getElementById("Amount" + id);
 
-    returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
+    cart.price = Math.round((cart.price + price) * 100) / 100;
+    cart.products[id].amount += 1;
+
+    totalPrice.textContent = cart.price;
+    prodAmount.textContent = cart.products[id].amount;
 }
-function decreaseAmount(_id, _price) {
 
-    if((parseInt(returnAmountPriceTotal(1, _id).textContent) - 1) === 0) {
-        removeProductFromSidebar(_id, _price);
+function decreaseAmount(id, price) {
+    if(cart.products[id].amount === 1) {
+        removeProductFromSidebar(id, price);
         return;
     }
 
-    returnAmountPriceTotal(1, _id).textContent = (parseInt(returnAmountPriceTotal(1, _id).textContent) - 1).toString();
-    returnAmountPriceTotal(2, _id).textContent = ((Math.round((parseFloat(returnAmountPriceTotal(2, _id).textContent) - _price) * 100)) / 100).toFixed(2);
-    cartPrice = Math.round((cartPrice - _price) * 100) / 100;
+    const prodAmount = document.getElementById("Amount" + id);
 
-    returnAmountPriceTotal(3, _id).textContent = (cartPrice).toFixed(2);
-}
-function returnAmountPriceTotal(elem, index) {
-    if (elem === 1) return document.querySelectorAll('[data-number="'+ index +'"]')[document.querySelectorAll('[data-number="'+ index +'"]').length - 1];
-    if (elem === 2) return document.querySelectorAll('[data-number="'+ "P0" + index +'"]')[document.querySelectorAll('[data-number="'+ "P0" + index +'"]').length - 1];
-    if (elem === 4) return document.querySelectorAll('[data-number="'+ "00" + index +'"]')[document.querySelectorAll('[data-number="'+ "00" + index +'"]').length - 1];
-    if (elem === 3) return document.getElementById('totalPrice');
+    cart.price = Math.round((cart.price - price) * 100) / 100;
+    cart.products[id].amount -= 1;
+
+    totalPrice.textContent = cart.price;
+    prodAmount.textContent = cart.products[id].amount;
 }

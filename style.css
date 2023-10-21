@@ -4,26 +4,33 @@ body {
     font-family: 'Dela Gothic One', cursive;
     margin: 0;
 }
+
 h1 {
     margin: 0;
 }
+
 h3 {
     margin: 8px 0 10px 0;
 }
+
 hr {
     border-top: none;
     margin: 0;
 }
+
 p {
     margin: 10px 0;
 }
+
 #wrapper {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
     margin: 0 11%;
+    gap: 15px;
 }
+
 header {
     font-size: 25px;
     height: 100%;
@@ -31,6 +38,7 @@ header {
     justify-content: center;
     text-align: center;
 }
+
 .prods {
     width: fit-content;
     border-radius: 10px;
@@ -38,6 +46,7 @@ header {
     background-color: #723da4;
     color: white;
 }
+
 .sidebarHeader {
     text-align: center;
     background-color: #c49ce0;
@@ -48,10 +57,12 @@ header {
     align-items: center;
     padding: 15px 10px;
 }
+
 .sepLine {
     border-top: #bdbbbb solid 2px;
     margin: 0;
 }
+
 #sidebarProducts {
     overflow-y: auto;
     overflow-x: hidden;
@@ -59,15 +70,18 @@ header {
     max-height: 50%;
 
 }
+
 .sidebarElement {
     display: flex;
     flex-direction: column;
 }
+
 .sidebarElementInfo {
     display: flex;
     flex-direction: column;
     border-bottom: #bdbbbb solid 1px;
 }
+
 .amount {
     display: flex;
     flex-direction: row;
@@ -75,13 +89,16 @@ header {
     align-items: center;
     width: 100px;
 }
+
 .productNums {
     font-size: 23px;
 }
+
 .productPositionPrice {
     display: flex;
     flex-direction: row;
 }
+
 .sign {
     background-size: cover;
     width: 23px;
@@ -89,9 +106,11 @@ header {
     cursor: pointer;
     background-position: center;
 }
+
 .plus {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAA/CAYAAABXXxDfAAABOklEQVRoge3b0W3CQBCE4VkqCB2RSqATm0pQKrHpIKkEdzB58N0DEhhL5G6d2/mekbw/GJBYDpC6SB5IDiRvnA0kj95zFUey43Od93zFkDwthGcH7zmLSLf3K0OteazWhQCAJFc8bDKzffFhsM14mFmVuXY1LrJVio9K8VEpPirFR6X4qBQfleKjUnxUio9K8dmDTcqfWjtUiWsnjzdDXN6ktKYD0k/XJE8ALu/dRP/OZ44fALS5JnpuzPGr348NmfIH3uQ6ho+PHP/tOoaPa44/u47h47IDADMbEesJOJvZ1902NH3lHdHmJ/8E4AdAn15srajDUnxUio9K8VEpPirFR6X4qBQfleKjUnxUiq9oU5uh2vFrNkPX4lN44Pznh1faPVZKsl8I773nK47zsdJ8uvJGcqTDMdJfrqO0Zs314usAAAAASUVORK5CYII=");
 }
+
 .minus {
     background-size: contain;
     background-repeat: no-repeat;
@@ -102,15 +121,24 @@ header {
     display: flex;
     flex-direction: column;
 }
+
 #sidebarIcon {
     height: 50px;
     width: 50px;
     cursor: pointer;
-    rotate: 270deg;
     transition: all 1s ;
     position: fixed;
     margin-top: 18px;
     top: 6px;
+}
+
+.sidebarIcon {
+    rotate: 90deg;
+    left: 160px;
+}
+
+.sidebarIconClosed {
+    rotate: 270deg;
     left: 0;
 }
 
@@ -124,8 +152,15 @@ header {
     top: 0;
     bottom: -10px;
     border-right: 1px solid #836c98;
-    transition: left 1s;
+    transition: 1s;
+}
+
+.sidebarClosed {
     left: -222px;
+}
+
+.sidebar {
+    left: 0;
 }
 
 #buyButton {
@@ -138,11 +173,12 @@ header {
     border: none;
     margin: 18px 0;
 }
+
 #buyButton:hover {
     background-color: #cbc7c7;
 }
+
 .product {
-    margin: 7px 7px 14px;
     height: 500px;
     max-width: 32%;
     min-width: 385px;
@@ -150,6 +186,7 @@ header {
     border-radius: 10px;
     box-sizing: border-box;
 }
+
 .productInfo {
     height: fit-content;
     border-radius: 0 0 10px 10px;
@@ -158,6 +195,7 @@ header {
     flex-direction: column;
     align-content: center;
 }
+
 .productFrame {
     display: flex;
     justify-content: center;
@@ -167,15 +205,18 @@ header {
     height: 80%;
     max-height: 200px;
 }
+
 .productImg {
     border-radius: 10px 10px 0 0;
     max-width: 100%;
     max-height: 199px;
     object-fit: contain;
 }
+
 .productTitleBlock {
     margin: 5px;
 }
+
 .productTitle {
     text-align: center;
     margin: 0;
@@ -185,6 +226,7 @@ header {
     -webkit-box-orient: vertical;
     height: 54px;
 }
+
 .productDescr {
     margin-bottom: 0;
     text-align: center;
@@ -201,9 +243,11 @@ header {
     flex-direction: row;
     padding-left: 17px;
 }
+
 .productCategory {
     padding-left: 17px;
 }
+
 .productButton {
     display: flex;
     flex-direction: row;
@@ -218,9 +262,11 @@ header {
     height: 71px;
     border: none;
 }
+
 .productButton:hover {
     background-color: #ac8bc7;
 }
+
 @media screen and (max-width: 1580px) {
     #wrapper {
         margin: 0 5%;
@@ -229,16 +275,19 @@ header {
         max-width: 20%;
     }
 }
+
 @media screen and (max-width: 1346px) {
     .product {
         max-width: 48%;
     }
 }
+
 @media screen and (max-width: 903px) {
     .product {
         max-width: 82%;
     }
 }
+
 @media screen and (max-width: 470px) {
     .prods {
         font-size: 40px;
@@ -250,6 +299,7 @@ header {
         font-size: 21px;
     }
 }
+
 @media screen and (max-width: 430px) {
     .prods {
         font-size: 33px;
