@@ -37,6 +37,7 @@ getProducts().then(products => {
         const productImage = document.createElement('img');
         productImage.src = item.image;
         productImage.setAttribute('alt', '');
+        productImage.setAttribute("id", "ImgProduct" + item.id);
         productImage.className = 'productImg';
 
         const productBlockInfo = document.createElement('div');
@@ -113,12 +114,20 @@ const cart = {
 const buyButton = document.getElementById('buyButton');
 const totalPrice = document.getElementById('totalPrice');
 
+const frontProducts = [];
+
 buyButton.addEventListener('click', ()=>{
-    if(cart.price > 0) {
-        cart.forEach(prod => {
-            console.log(prod);
-            removeProductFromSidebar(prod.id, prod.price);
+
+    if (frontProducts.length > 0) {
+        frontProducts.forEach(el => {
+            el.remove();
         })
+
+        cart.products = [];
+        cart.price = 0;
+
+        totalPrice.textContent = cart.price;//!!!!CRUTCH DETECTED!!!!
+
         alert("Thanks for purchase!");
     }
 })
@@ -136,14 +145,19 @@ function addProductToSidebar(id, title, price) {
     }
 
     cart.products[id] = product;
-    cart.price += Math.round((cart.products[id].price) * 100) / 100;
+    cart.price += cart.products[id].price;
+    cart.price = Math.round(cart.price * 100) / 100;
 
-    const Element = document.createElement('div');
-    Element.className = "sidebarElement";
-    Element.setAttribute('id', "Element" + id);
+    const element = document.createElement('div');
+    element.className = "sidebarElement";
+    element.setAttribute('id', "Element" + id);
 
-    const sideBarProduct = document.createElement('div');
-    sideBarProduct.className = "sidebarElement";
+    const sidebarImgFrame = document.createElement('div');
+    sidebarImgFrame.className = 'sidebarImgFrame';
+
+    const sidebarImg = document.createElement('Img');
+    sidebarImg.src = document.getElementById("Img" + id).src;
+    sidebarImg.className = 'sidebarImg';
 
     const productNameBlock = document.createElement('div');
     productNameBlock.className = "sidebarElementInfo";
@@ -206,6 +220,7 @@ function addProductToSidebar(id, title, price) {
     dollarSign.className = "productNums";
     dollarSign.textContent = "$";
 
+    sidebarImgFrame.append(sidebarImg);
 
     productAmountBlock.append(plusSign, productAmountValue, minusSign);
 
@@ -217,14 +232,18 @@ function addProductToSidebar(id, title, price) {
 
     productsPriceBlock.append(productsPrice, productsPriceValueBlock);
 
-    Element.append(productNameBlock, AmountBlock, productsPriceBlock);
+    element.append(sidebarImgFrame, productNameBlock, AmountBlock, productsPriceBlock);
 
-    sideBar.append(Element);
+    sideBar.append(element);
+
+    frontProducts.push(element);////!!!!CRUTCH DETECTED PT.2!!!!
 }
 
 function removeProductFromSidebar(id, price) {
     cart.price = Math.abs(Math.round((cart.price - price) * 100) / 100);
     delete cart.products[id];
+
+    delete frontProducts.find((el) => el.getAttribute('id') === "Element" + id);
 
     const toRemove = document.getElementById("Element" + id);
     toRemove.remove();
